@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en">
+<div class="container mt-5">
+    <h1>{{ course.title }}</h1>
+    <p>{{ course.description }}</p>
+    <p>Instructor: {{ course.longdescription }}</p>
+    <p>Price: ${{ course.price }}</p>
+    <!-- You might want to link the Enroll button to a registration form or a checkout page -->
+    {% if user.is_authenticated %}
+    <form action="{% url 'courses:enroll_in_course' course.id %}" method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-primary">Enroll in Course</button>
+        {% if messages %}
+        <ul class="messages">
+          {% for message in messages %}
+          <li>{{ message }}</li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+    </form>
+{% endif %}
+</div>
+{% endblock %}
