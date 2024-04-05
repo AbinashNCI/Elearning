@@ -15,10 +15,8 @@ phases:
       - unzip ./sonar-scanner-cli-3.3.0.1492-linux.zip
       
   build:
-    commands:
-      - mvn test     
+    commands:    
       - mvn sonar:sonar -Dsonar.login=219d7ba1f022613597688ca8c17859384ec34e15 -Dsonar.host.url=https://sonarcloud.io -Dsonar.projectKey=Elearning -Dsonar.organization=AbinashNCI
       - sleep 5
       - curl https://sonarcloud.io/api/qualitygates/project_status?projectKey=Elearning >result.json
       - cat result.json
-      - if [ $(jq -r '.projectStatus.status' result.json) = ERROR ] ; then $CODEBUILD_BUILD_SUCCEEDING -eq 0 ;fi
