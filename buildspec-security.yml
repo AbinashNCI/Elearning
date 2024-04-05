@@ -4,7 +4,6 @@ phases:
   install:
     runtime-versions: 
       java: corretto21
-      ubuntu: 20.04
   pre_build:
     commands:
       - apt-get update
