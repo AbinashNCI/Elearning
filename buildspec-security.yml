@@ -14,9 +14,9 @@ phases:
     commands:
       - apt-get update
       - apt-get install -y unzip
-      - curl -o /tmp/sonarscanner.zip -L https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.6.2.2472-linux.zip
+      - curl -o /tmp/sonarscanner.zip -L https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-5.0.1.3006-linux.zip
       - unzip /tmp/sonarscanner.zip -d /tmp
-      - mv /tmp/sonar-scanner-4.6.2.2472-linux /opt/sonar-scanner
+      - mv /tmp/sonar-scanner-cli-5.0.1.3006-linux /opt/sonar-scanner
       - ln -s /opt/sonar-scanner/bin/sonar-scanner /usr/bin/sonar-scanner
   build:
     commands:
