@@ -1,10 +1,5 @@
 version: 0.2
-env:
-  secrets-manager:
-    LOGIN: prod/devops/23188715:SonarToken
-    HOST: prod/devops/23188715:Host
-    Organization: prod/devops/23188715:organization
-    Project: prod/devops/23188715:Project
+    
 phases:
   install:
     runtime-versions:
@@ -22,8 +17,8 @@ phases:
   build:
     commands:
       - mvn test     
-      - mvn sonar:sonar -Dsonar.login=$LOGIN -Dsonar.host.url=$HOST -Dsonar.projectKey=$Project -Dsonar.organization=$Organization
+      - mvn sonar:sonar -Dsonar.login=219d7ba1f022613597688ca8c17859384ec34e15 -Dsonar.host.url=https://sonarcloud.io -Dsonar.projectKey=Elearning -Dsonar.organization=AbinashNCI
       - sleep 5
-      - curl https://sonarcloud.io/api/qualitygates/project_status?projectKey=$Project >result.json
+      - curl https://sonarcloud.io/api/qualitygates/project_status?projectKey=Elearning >result.json
       - cat result.json
       - if [ $(jq -r '.projectStatus.status' result.json) = ERROR ] ; then $CODEBUILD_BUILD_SUCCEEDING -eq 0 ;fi
