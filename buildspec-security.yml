@@ -1,22 +1,23 @@
 version: 0.2
+
+env:
+  variables:
+    SONAR_PROJECT_KEY: "AbinashNCI_Elearning"
+    SONAR_ORGANIZATION: "AbinashNCI"
+    SONAR_HOST_URL: "https://sonarcloud.io"
+    SONAR_TOKEN: "9553f786181d4d6c8215a60ee390397f29bbf96f"
+
 phases:
   install:
     runtime-versions:
-      java: corretto21
-  pre_build:
+      java: corretto11
     commands:
-      - yum update -y 
-      - yum install -y jq
-      - retry_count=3
-      - for i in $(seq 1 $retry_count); do wget https://archive.apache.org/dist/maven/maven-3/3.5.4/binaries/apache-maven-3.5.4-bin.tar.gz && break || sleep 10; done
-      - tar xzf apache-maven-3.5.4-bin.tar.gz || true
-      - ln -s apache-maven-3.5.4 maven
-      - wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-3.3.0.1492-linux.zip
-      - unzip ./sonar-scanner-cli-3.3.0.1492-linux.zip
-      
+      - apt-get update
+      - apt-get install -y unzip
+      - curl -o /tmp/sonarscanner.zip -L https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.6.2.2472-linux.zip
+      - unzip /tmp/sonarscanner.zip -d /tmp
+      - mv /tmp/sonar-scanner-4.6.2.2472-linux /opt/sonar-scanner
+      - ln -s /opt/sonar-scanner/bin/sonar-scanner /usr/bin/sonar-scanner
   build:
-    commands:    
-      - mvn sonar:sonar -X -Dsonar.login=219d7ba1f022613597688ca8c17859384ec34e15 -Dsonar.host.url=https://sonarcloud.io/ -Dsonar.projectKey=AbinashNCI_Elearning -Dsonar.organization=AbinashNCI
-      - sleep 5
-      - curl https://sonarcloud.io/api/qualitygates/project_status?projectKey=AbinashNCI_Elearning >result.json
-      - cat result.json
+    commands:
+      - sonar-scanner -Dsonar.projectKey=$SONAR_PROJECT_KEY -Dsonar.organization=$SONAR_ORGANIZATION -Dsonar.sources=. -Dsonar.host.url=$SONAR_HOST_URL -Dsonar.login=$SONAR_TOKEN
