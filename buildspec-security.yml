@@ -3,7 +3,7 @@ version: 0.2
 env:
   variables:
     SONAR_PROJECT_KEY: "AbinashNCI_Elearning"
-    SONAR_ORGANIZATION: "AbinashNCI"
+    SONAR_ORGANIZATION: "abinashnci"
     SONAR_HOST_URL: "https://sonarcloud.io"
     SONAR_TOKEN: "9553f786181d4d6c8215a60ee390397f29bbf96f"
 
