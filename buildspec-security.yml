@@ -10,7 +10,7 @@ env:
 phases:
   install:
     runtime-versions:
-      java: corretto11
+      java: corretto21
     commands:
       - apt-get update
       - apt-get install -y unzip
