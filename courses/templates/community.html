@@ -5,20 +5,6 @@
 <!DOCTYPE html>
 <html data-bs-theme="light" lang="en">
 <body>
-    <nav class="navbar navbar-expand-lg fixed-top bg-body clean-navbar navbar-light">
-    <div class="container"><a class="navbar-brand logo" href="#">LearnLand</a><button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
-        <div id="navcol-1" class="collapse navbar-collapse">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
-                <li class="nav-item"><a class="nav-link" href="catalog-page.html">Courses</a></li>
-                <li class="nav-item"><a class="nav-link" href="pricing.html">PRICING</a></li>
-                <li class="nav-item"><a class="nav-link" href="community.html">COMMUNITY</a></li>
-                <li class="nav-item"><a class="nav-link" href="about-us.html">ABOUT US</a></li>
-                <li class="nav-item"><a class="nav-link" href="contact-us.html">Contact us</a></li>
-            </ul>
-        </div>
-    </div>
-</nav>
 
 <div class="container mt-5">
     <header class="community-header text-center">
@@ -35,7 +21,7 @@
                     <div class="card-body">
                         <h5 class="card-title">General Discussion</h5>
                         <p class="card-text">Share your thoughts, general questions, and advice here.</p>
-                        <a href="forum.html" class="btn btn-primary">Visit Forum</a>
+                        <a href="{% url 'courses:forum' %}" class="btn btn-primary">Visit Forum</a>
                     </div>
                 </div>
             </div>
@@ -44,7 +30,7 @@
                     <div class="card-body">
                         <h5 class="card-title">Course Help</h5>
                         <p class="card-text">Need help with a course? Ask your questions here.</p>
-                        <a href="forum.html" class="btn btn-primary">Visit Forum</a>
+                        <a href="{% url 'courses:forum' %}" class="btn btn-primary">Visit Forum</a>
                     </div>
                 </div>
             </div>
@@ -53,7 +39,7 @@
                     <div class="card-body">
                         <h5 class="card-title">Off-Topic</h5>
                         <p class="card-text">Discussions not related to courses can go here.</p>
-                        <a href="forum.html" class="btn btn-primary">Visit Forum</a>
+                        <a href="{% url 'courses:forum' %}" class="btn btn-primary">Visit Forum</a>
                     </div>
                 </div>
             </div>
@@ -84,8 +70,6 @@
     </section>
 </div>
 
-<!-- Optional JavaScript -->
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

@@ -11,11 +11,11 @@ from django.shortcuts import render
 from django.contrib.auth.models import User
 from django.contrib import messages
 from .models import Enrollment
-
+from .forms import UserSignUpForm
 
 def signup(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = UserSignUpForm(request.POST)
         if form.is_valid():
             user = form.save()
             login(request, user)  # Log the user in
@@ -40,7 +40,7 @@ def Userlogin(request):
         
             else:
                 print("errrorrrr")
-                messages.error(request, "Invalid username or password")
+                return redirect('signup/')
         except:
                 print("erorrrrrrrr")
                 messages.error(request, "Invalid username or password")
@@ -67,10 +67,9 @@ def enroll_in_course(request, course_id):
         messages.success(request, "You have successfully enrolled in this course!")
     else:
         messages.info(request, "You are already enrolled in this course.")
-
-    return redirect('courses/')  # Redirect to the course detail page or elsewhere
-
-
+    enrollments = Enrollment.objects.filter(user=request.user).select_related('course')
+    enrolled_courses = [enrollment.course for enrollment in enrollments]
+    return render(request, 'my_enrolled_courses.html', {'enrolled_courses': enrolled_courses})
 
 @login_required
 def my_enrolled_courses(request):
@@ -131,8 +130,11 @@ def pricing(request):
 def about_us(request):
     return render(request,'about-us.html')
 
-def community(request):
+def community(request):     
     return render(request,'community.html')
-
+def  contactus(request):
+    return render(request, 'contact-us.html')
 def logout(request):
     return render(request, 'login.html')
+def  forum(request):
+    return render(request, 'forum.html')

@@ -7,7 +7,9 @@ from django.conf.urls.static import static
 app_name='courses'
 urlpatterns = [
     path('', views.Userlogin, name='login'),
-    path('logout/',views.logout,name='logout'),
+   path('logout/',views.logout,name='logout'),
+   path('contact-us/',views.contactus,name='contactus'),
+    path('forum/',views.forum,name='forum'),
     path('landing/', views.index, name='index'),
      path('signup/', views.signup, name='signup'),
     path('login/',views.Userlogin, name='login' ),
@@ -21,4 +23,5 @@ urlpatterns = [
     path('courses/<int:course_id>/questions/submit/', views.submit_question, name='submit_question'),
     path('about-us/',views.about_us,name='about-us'),
     path('community/',views.community,name='community'),
+    
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
