@@ -24,4 +24,4 @@ urlpatterns = [
     path('about-us/',views.about_us,name='about-us'),
     path('community/',views.community,name='community'),
     
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # store the static media files,documents 

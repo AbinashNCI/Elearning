@@ -2,8 +2,7 @@
 from django.shortcuts import get_object_or_404, render
 
 from courses.models import Course
-#added for view pipelineworkflow#added for view pipelineworkflow
-# views.py
+#added for view pipelineworkflow
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login,authenticate
@@ -18,13 +17,12 @@ def signup(request):
         form = UserSignUpForm(request.POST)
         if form.is_valid():
             user = form.save()
-            login(request, user)  # Log the user in
-            return redirect('courses:index')  # Adjust the redirect as needed
+            login(request, user)  # The login operation will happedn here
+            return redirect('courses:index') 
     else:
         form = UserCreationForm()
     return render(request, 'signup.html', {'form': form})
 
-# views.py
 
 def Userlogin(request):
     if request.method == 'POST':
@@ -36,7 +34,7 @@ def Userlogin(request):
             if user is not None:
                 print('Suceess login')
                 login(request, user)
-                return redirect('landing/')  # Adjust the redirect as needed
+                return redirect('landing/') 
         
             else:
                 print("errrorrrr")
@@ -44,9 +42,7 @@ def Userlogin(request):
         except:
                 print("erorrrrrrrr")
                 messages.error(request, "Invalid username or password")
-                # Return an 'invalid login' error message.
                 print('out of if')
-                #return render(request, 'login.html', {'error': 'Invalid username or password.'})
 
     return render(request, 'login.html')    
 
@@ -73,7 +69,7 @@ def enroll_in_course(request, course_id):
 
 @login_required
 def my_enrolled_courses(request):
-    # Assuming your Enrollment model has a 'course' ForeignKey to the Course model
+    #fetch the student enrolled courses
     enrollments = Enrollment.objects.filter(user=request.user).select_related('course')
     enrolled_courses = [enrollment.course for enrollment in enrollments]
     return render(request, 'my_enrolled_courses.html', {'enrolled_courses': enrolled_courses})
@@ -99,7 +95,7 @@ def submit_question(request, course_id):
         question_text = request.POST.get("question")
         course = Course.objects.get(pk=course_id)
 
-        # Create and save the new question
+        # here students question will save to db here
         question = Question.objects.create(
             course=course,
             user=request.user,
@@ -107,10 +103,8 @@ def submit_question(request, course_id):
         )
         question.save()
 
-        # Redirect back to the course study page
         return HttpResponseRedirect(reverse('course_study_page', args=[course_id]))
     else:
-        # If not a POST request, redirect to the course study page without action
         return HttpResponseRedirect(reverse('course_study_page', args=[course_id]))
 
 

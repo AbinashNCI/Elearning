@@ -16,8 +16,6 @@ class Material(models.Model):
     title = models.CharField(max_length=255)
     video_url = models.URLField(blank=True, null=True)
     document = models.FileField(upload_to='documents/', blank=True, null=True)
-    # Add fields for other types of materials as needed
-
 class Question(models.Model):
     course = models.ForeignKey(Course, related_name='questions', on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)

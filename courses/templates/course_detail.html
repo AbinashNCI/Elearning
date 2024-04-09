@@ -7,7 +7,7 @@
     <p>{{ course.description }}</p>
     <p>Instructor: {{ course.longdescription }}</p>
     <p>Price: ${{ course.price }}</p>
-    <!-- You might want to link the Enroll button to a registration form or a checkout page -->
+    <!-- after enrolling to show message in the page using if message block -->
     {% if user.is_authenticated %}
     <form action="{% url 'courses:enroll_in_course' course.id %}" method="post">
         {% csrf_token %}
